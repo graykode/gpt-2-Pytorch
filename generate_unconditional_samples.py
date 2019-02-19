@@ -35,7 +35,9 @@ def sample_model(model_name='117M', seed=None, nsamples=0, batch_size=1, length=
     # saver.restore(sess, ckpt)
 
     # model.load_state_dict(torch.load(os.path.join('models', model_name)))
-    # model.eval()
+    ckpt = torch.load(os.path.join('models', model_name))
+    model.load_state_dict(ckpt)
+    model.eval()
 
     generated = 0
     while nsamples == 0 or generated < nsamples:
