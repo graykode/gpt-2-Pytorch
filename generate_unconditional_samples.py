@@ -1,6 +1,5 @@
 import os
 import json
-import fire
 import torch
 import numpy as np
 import model_def, sample, encoder
@@ -35,7 +34,9 @@ def sample_model(model_name='117M', seed=None, nsamples=0, batch_size=1, length=
     # ckpt = tf.train.latest_checkpoint(os.path.join('models', model_name))
     # saver.restore(sess, ckpt)
 
-    model.load_state_dict(torch.load(os.path.join('models', model_name)))
+    # model.load_state_dict(torch.load(os.path.join('models', model_name)))
+    ckpt = torch.load(os.path.join('models', model_name))
+    model.load_state_dict(ckpt)
     model.eval()
 
     generated = 0
@@ -43,8 +44,9 @@ def sample_model(model_name='117M', seed=None, nsamples=0, batch_size=1, length=
         for i in range(batch_size):
             generated += batch_size
             text = enc.decode(output[i])
+            print(text)
             print("=" * 40 + " SAMPLE " + str(generated) + " " + "=" * 40)
             print(text)
 
 if __name__ == '__main__':
-    fire.Fire(sample_model)
+    sample_model()
