@@ -31,7 +31,7 @@ $ pip install -r requirements.txt
 
 Now, You can run like this.
 
-```python
+```shell
 $ python main.py --text "Once when I was six years old I saw a magnificent picture in a book, called True Stories from Nature, about the primeval forest."
 ```
 
