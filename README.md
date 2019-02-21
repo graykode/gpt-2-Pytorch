@@ -29,11 +29,13 @@ $ curl --output gpt2-pytorch_model.bin https://s3.amazonaws.com/models.huggingfa
 $ pip install -r requirements.txt
 ```
 
-Now, You can run like this.
+2. Now, You can run like this.
 
 ```shell
 $ python main.py --text "Once when I was six years old I saw a magnificent picture in a book, called True Stories from Nature, about the primeval forest."
 ```
+
+3. Also You can Quick Start in [Google Colab](https://colab.research.google.com/github/graykode/gpt-2-Pytorch/blob/master/GPT2_Pytorch.ipynb)
 
 
 
