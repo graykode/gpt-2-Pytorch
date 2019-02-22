@@ -72,10 +72,11 @@ See more detail option about `temperature` and `top_k` in [here](https://github.
 
 ## License
 
-OpenAi/GPT2 follow MIT license, huggingface/pytorch-pretrained-BERT is Apache license. I follow MIT license with original GPT2 repository
+- OpenAi/GPT2 follow MIT license, huggingface/pytorch-pretrained-BERT is Apache license. 
+- I follow MIT license with original GPT2 repository
 
 
 
 ## Acknowledgement
 
-Jeff Wu(@WuTheFWasThat), Thomas Wolf(@thomwolf) allowing referring code.
+[Jeff Wu(@WuTheFWasThat)](https://github.com/WuTheFWasThat), [Thomas Wolf(@thomwolf)](https://github.com/thomwolf) for allowing referring code.
