@@ -23,10 +23,12 @@ def text_generator(state_dict):
     parser.add_argument('--unconditional', action='store_true', help='If true, unconditional generation.')
     parser.add_argument("--batch_size", type=int, default=-1)
     parser.add_argument("--length", type=int, default=-1)
-    parser.add_argument("--temperature", type=int, default=1)
-    parser.add_argument("--top_k", type=int, default=0)
+    parser.add_argument("--temperature", type=int, default=0.7)
+    parser.add_argument("--top_k", type=int, default=40)
     args = parser.parse_args()
-    print(args)
+
+    if args.quiet is False:
+        print(args)
 
     if args.batch_size == -1:
         args.batch_size = 1
