@@ -31,11 +31,13 @@ $ pip install -r requirements.txt
 
 2. Now, You can run like this.
 
+- Text from Book 1984, George Orwell
+
 ```shell
-$ python main.py --text "Once when I was six years old I saw a magnificent picture in a book, called True Stories from Nature, about the primeval forest."
+$ python main.py --text "It was a bright cold day in April, and the clocks were striking thirteen. Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions, though not quickly enough to prevent a swirl of gritty dust from entering along with him."
 ```
 
-3. Also You can Quick Start in [Google Colab](https://colab.research.google.com/github/graykode/gpt-2-Pytorch/blob/master/GPT2_Pytorch.ipynb)
+3. Also You can Quick Starting in [Google Colab](https://colab.research.google.com/github/graykode/gpt-2-Pytorch/blob/master/GPT2_Pytorch.ipynb)
 
 
 
