@@ -34,7 +34,7 @@ def text_generator(state_dict):
         args.batch_size = 1
     assert args.nsamples % args.batch_size == 0
 
-    seed = random.randint(0, 10000)
+    seed = random.randint(0, 2147483647)
     np.random.seed(seed)
     torch.random.manual_seed(seed)
     torch.cuda.manual_seed(seed)
