@@ -41,14 +41,14 @@ $ python main.py --text "Once when I was six years old I saw a magnificent pictu
 
 ## Option
 
-- --text : sentence to begin with.
-- --quiet: not print all of the extraneous stuff like the "================"
-- --nsamples : number of sample sampled in batch when multinomial function use
-- --unconditional : If true, unconditional generation.
-- --batch_size : number of batch size
-- --length : sentence length (< number of context)
-- --temperature :  use when divided with logits, 0.7 value with top_k 40
-- --top_k  : Returns the top k largest elements of the given input tensor along a given dimension.
+- `--text` : sentence to begin with.
+- `--quiet` : not print all of the extraneous stuff like the "================"
+- `--nsamples` : number of sample sampled in batch when multinomial function use
+- `--unconditional` : If true, unconditional generation.
+- `--batch_size` : number of batch size
+- `--length` : sentence length (< number of context)
+- `--temperature`:  the thermodynamic temperature in distribution `(default 0.7)`
+- `--top_k`  : Returns the top k largest elements of the given input tensor along a given dimension. `(default 40)`
 
 See more detail option about `temperature` and `top_k` in [here](https://github.com/openai/gpt-2#gpt-2-samples)
 
