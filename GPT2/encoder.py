@@ -1,9 +1,8 @@
 """Byte pair encoding utilities"""
-
-import os
 import json
 import regex as re
 from functools import lru_cache
+
 
 @lru_cache()
 def bytes_to_unicode():
@@ -27,6 +26,7 @@ def bytes_to_unicode():
     cs = [chr(n) for n in cs]
     return dict(zip(bs, cs))
 
+
 def get_pairs(word):
     """Return set of symbol pairs in a word.
     Word is represented as tuple of symbols (symbols being variable-length strings).
@@ -38,13 +38,14 @@ def get_pairs(word):
         prev_char = char
     return pairs
 
+
 class Encoder:
     def __init__(self, encoder, bpe_merges, errors='replace'):
         self.encoder = encoder
-        self.decoder = {v:k for k,v in self.encoder.items()}
-        self.errors = errors # how to handle errors in decoding
+        self.decoder = {v: k for k, v in self.encoder.items()}
+        self.errors = errors  # how to handle errors in decoding
         self.byte_encoder = bytes_to_unicode()
-        self.byte_decoder = {v:k for k, v in self.byte_encoder.items()}
+        self.byte_decoder = {v: k for k, v in self.byte_encoder.items()}
         self.bpe_ranks = dict(zip(bpe_merges, range(len(bpe_merges))))
         self.cache = {}
 
@@ -61,7 +62,7 @@ class Encoder:
             return token
 
         while True:
-            bigram = min(pairs, key = lambda pair: self.bpe_ranks.get(pair, float('inf')))
+            bigram = min(pairs, key=lambda pair: self.bpe_ranks.get(pair, float('inf')))
             if bigram not in self.bpe_ranks:
                 break
             first, second = bigram
@@ -104,13 +105,11 @@ class Encoder:
         text = bytearray([self.byte_decoder[c] for c in text]).decode('utf-8', errors=self.errors)
         return text
 
+
 def get_encoder():
     with open('./GPT2/encoder.json', 'r') as f:
         encoder = json.load(f)
     with open('./GPT2/vocab.bpe', 'r', encoding="utf-8") as f:
         bpe_data = f.read()
     bpe_merges = [tuple(merge_str.split()) for merge_str in bpe_data.split('\n')[1:-1]]
-    return Encoder(
-        encoder=encoder,
-        bpe_merges=bpe_merges,
-    )
+    return Encoder(encoder=encoder, bpe_merges=bpe_merges)

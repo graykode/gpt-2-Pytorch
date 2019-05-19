@@ -7,6 +7,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 def load_weight(model, state_dict):
     old_keys = []
     new_keys = []

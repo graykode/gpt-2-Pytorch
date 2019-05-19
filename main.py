@@ -11,11 +11,12 @@ import argparse
 import numpy as np
 from GPT2.model import (GPT2LMHeadModel)
 from GPT2.utils import load_weight
-from GPT2.config import GPT2Config
+from GPT2.config import get_config
 from GPT2.sample import sample_sequence
 from GPT2.encoder import get_encoder
 
-def text_generator(state_dict):
+
+def text_generator(state_dict, config):
     parser = argparse.ArgumentParser()
     parser.add_argument("--text", type=str, required=True)
     parser.add_argument("--quiet", type=bool, default=False)
@@ -42,7 +43,6 @@ def text_generator(state_dict):
 
     # Load Model
     enc = get_encoder()
-    config = GPT2Config()
     model = GPT2LMHeadModel(config)
     model = load_weight(model, state_dict)
     model.to(device)
@@ -60,7 +60,7 @@ def text_generator(state_dict):
     for _ in range(args.nsamples // args.batch_size):
         out = sample_sequence(
             model=model, length=args.length,
-            context=context_tokens  if not  args.unconditional else None,
+            context=context_tokens if not args.unconditional else None,
             start_token=enc.encoder['<|endoftext|>'] if args.unconditional else None,
             batch_size=args.batch_size,
             temperature=args.temperature, top_k=args.top_k, device=device
@@ -74,9 +74,13 @@ def text_generator(state_dict):
             print(text)
 
 if __name__ == '__main__':
-    if os.path.exists('gpt2-pytorch_model.bin'):
-        state_dict = torch.load('gpt2-pytorch_model.bin', map_location='cpu' if not torch.cuda.is_available() else None)
-        text_generator(state_dict)
+    model_name = '117M'
+    model_path = os.path.join('pretrained_models', model_name, 'model.bin')
+
+    if os.path.exists(model_path):
+        state_dict = torch.load(model_path, map_location='cpu' if not torch.cuda.is_available() else None)
+        config = get_config(model_name)
+        text_generator(state_dict, config)
     else:
         print('Please download gpt2-pytorch_model.bin')
         sys.exit()
