@@ -40,7 +40,7 @@ def load_dataset(enc, path, combine):
         else:
 
             # Plain text
-            with open(path, 'r') as fp:
+            with open(path, mode='r', encoding='utf-8') as fp:
                 raw_text += fp.read()
 
             if len(raw_text) >= combine:

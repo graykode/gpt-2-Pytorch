@@ -35,7 +35,6 @@ def get_state_dict(model_name='117M'):
 def load_model(model, state_dict, device):
     model = load_weight(model, state_dict)
     model.to(device)
-    model.eval()
     return model
 
 
