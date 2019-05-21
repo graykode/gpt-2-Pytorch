@@ -9,8 +9,10 @@ import math
 import torch.nn as nn
 from torch.nn.parameter import Parameter
 
+
 def gelu(x):
     return 0.5 * x * (1 + torch.tanh(math.sqrt(2 / math.pi) * (x + 0.044715 * torch.pow(x, 3))))
+
 
 class LayerNorm(nn.Module):
     def __init__(self, hidden_size, eps=1e-12):
@@ -27,6 +29,7 @@ class LayerNorm(nn.Module):
         x = (x - u) / torch.sqrt(s + self.variance_epsilon)
         return self.weight * x + self.bias
 
+
 class Conv1D(nn.Module):
     def __init__(self, nf, nx):
         super(Conv1D, self).__init__()
@@ -41,6 +44,7 @@ class Conv1D(nn.Module):
         x = torch.addmm(self.bias, x.view(-1, x.size(-1)), self.weight)
         x = x.view(*size_out)
         return x
+
 
 class Attention(nn.Module):
     def __init__(self, nx, n_ctx, config, scale=False):
@@ -94,6 +98,7 @@ class Attention(nn.Module):
         a = self.c_proj(a)
         return a, present
 
+
 class MLP(nn.Module):
     def __init__(self, n_state, config):  # in MLP: n_state=3072 (4 * n_embd)
         super(MLP, self).__init__()
@@ -106,6 +111,7 @@ class MLP(nn.Module):
         h = self.act(self.c_fc(x))
         h2 = self.c_proj(h)
         return h2
+
 
 class Block(nn.Module):
     def __init__(self, n_ctx, config, scale=False):
@@ -122,6 +128,7 @@ class Block(nn.Module):
         m = self.mlp(self.ln_2(x))
         x = x + m
         return x, present
+
 
 class GPT2Model(nn.Module):
     def __init__(self, config):
@@ -172,6 +179,7 @@ class GPT2Model(nn.Module):
         output_shape = input_shape + (hidden_states.size(-1),)
         return hidden_states.view(*output_shape), presents
 
+
 class GPT2LMHead(nn.Module):
     def __init__(self, model_embeddings_weights, config):
         super(GPT2LMHead, self).__init__()
@@ -189,6 +197,7 @@ class GPT2LMHead(nn.Module):
         lm_logits = self.decoder(hidden_state)
         return lm_logits
 
+
 class GPT2LMHeadModel(nn.Module):
     def __init__(self, config):
         super(GPT2LMHeadModel, self).__init__()
@@ -205,6 +214,6 @@ class GPT2LMHeadModel(nn.Module):
         lm_logits = self.lm_head(hidden_states)
         if lm_labels is not None:
             loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
-            loss = loss_fct(lm_logits.view(-1, lm_logits.size(-1)), lm_labels.view(-1))
+            loss = loss_fct(lm_logits.view(-1, lm_logits.size(-1)), lm_labels.contiguous().view(-1))
             return loss
         return lm_logits, presents

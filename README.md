@@ -24,7 +24,8 @@ This repository is simple implementation GPT-2 about **text-generator** in **Pyt
 ```shell
 $ git clone https://github.com/graykode/gpt-2-Pytorch && cd gpt-2-Pytorch
 # download huggingface's pytorch model 
-$ curl --output gpt2-pytorch_model.bin https://s3.amazonaws.com/models.huggingface.co/bert/gpt2-pytorch_model.bin
+$ mkdir -p pretrained_models/117M
+$ curl --output pretrained_models/117M/model.bin https://s3.amazonaws.com/models.huggingface.co/bert/gpt2-pytorch_model.bin
 # setup requirements
 $ pip install -r requirements.txt
 ```
@@ -54,12 +55,19 @@ $ python main.py --text "It was a bright cold day in April, and the clocks were 
 
 See more detail option about `temperature` and `top_k` in [here](https://github.com/openai/gpt-2#gpt-2-samples)
 
+## Training
 
+You can also fine-tune a pre-trained gpt-2 model on your own custom dataset:
+
+```
+$ python train.py --dataset data/webtext_train_10 --model_name 117M --sample_every 100 --save_every 1000
+```
 
 ## Dependencies
 
-- Pytorch 0.41+
+- Pytorch 1.0.0
 - regex 2017.4.5
+- tqdm 4.31.1
 
 
 
