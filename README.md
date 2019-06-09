@@ -24,8 +24,7 @@ This repository is simple implementation GPT-2 about **text-generator** in **Pyt
 $ git clone https://github.com/graykode/gpt-2-Pytorch && cd gpt-2-Pytorch
 # download huggingface's pytorch model 
 $ curl --output gpt2-pytorch_model.bin https://s3.amazonaws.com/models.huggingface.co/bert/gpt2-pytorch_model.bin
-# setup requirements
-# if using mac os, then run setup as descibed [here](/Mac OS Setup/)
+# setup requirements, if using mac os, then run setup as descibed below
 $ pip install -r requirements.txt
 ```
 
