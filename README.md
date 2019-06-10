@@ -20,14 +20,14 @@ This repository is simple implementation GPT-2 about **text-generator** in **Pyt
 ## Quick Start
 
 1. download GPT2 pre-trained model in Pytorch which huggingface/pytorch-pretrained-BERT already made! (Thanks for sharing! it's help my problem transferring tensorflow(ckpt) file to Pytorch Model!)
-
 ```shell
 $ git clone https://github.com/graykode/gpt-2-Pytorch && cd gpt-2-Pytorch
 # download huggingface's pytorch model 
 $ curl --output gpt2-pytorch_model.bin https://s3.amazonaws.com/models.huggingface.co/bert/gpt2-pytorch_model.bin
-# setup requirements
+# setup requirements, if using mac os, then run additional setup as descibed below
 $ pip install -r requirements.txt
 ```
+
 
 2. Now, You can run like this.
 
@@ -61,7 +61,16 @@ See more detail option about `temperature` and `top_k` in [here](https://github.
 - Pytorch 0.41+
 - regex 2017.4.5
 
-
+### Mac OS Setup
+```shell
+$ python3 -m venv venv
+$ source venv/bin/activate
+$ pip install torch tqdm
+$ brew install libomp
+$ export LC_ALL=en_US.UTF-8
+$ export LANG=en_US.UTF-8
+$ pip install -r requirements.txt
+```
 
 ## Author
 
